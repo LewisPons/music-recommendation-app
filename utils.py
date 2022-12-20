@@ -1,6 +1,5 @@
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
-from credentials import CLIENT_ID, CLIENT_SECRET
 
 import pandas as pd
 import numpy as np 
@@ -14,7 +13,7 @@ SONG_FEATURES = ['danceability', 'energy', 'key',
        'liveness', 'valence', 'tempo', 'time_signature']
 
 
-def spotipy_authorize(cid: str = CLIENT_ID, secret: str = CLIENT_SECRET):
+def spotipy_authorize(cid: str, secret: str):
     """
         Get Spotify API Credentials manager
     """
