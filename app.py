@@ -2,7 +2,6 @@
 import streamlit as st
 import pandas as pd
 from PIL import Image
-from tqdm import tqdm
 from utils import call_playlist, music_recomendation, get_songs_visuals, SONG_FEATURES, visualize_cover_art
 import codecs
 
