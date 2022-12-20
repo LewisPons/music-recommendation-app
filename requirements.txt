@@ -1,0 +1,9 @@
+numpy==1.24.0
+pandas==1.5.2
+scikit-learn==1.2.0
+spotipy==2.22.0
+faiss-cpu==1.7.3
+streamlit
+fastparquet
+scikit-image
+matplotlib
