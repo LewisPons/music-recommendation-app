@@ -1,6 +1,5 @@
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
-from credentials import CLIENT_ID, CLIENT_SECRET
 
 import pandas as pd
 import numpy as np 
