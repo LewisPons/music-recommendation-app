@@ -6,7 +6,7 @@ from tqdm import tqdm
 from utils import call_playlist, music_recomendation, get_songs_visuals, SONG_FEATURES, visualize_cover_art
 import codecs
 
-# https://open.spotify.com/playlist/7sY3tKQa40BXziDEer3m3I?si=89f0cffef02e41ec
+
 
 st.set_page_config(page_title="Music Recomendation App")
 
