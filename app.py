@@ -9,8 +9,8 @@ import os
 
 st.set_page_config(page_title="Music Recomendation App")
 
-CLIENT_ID = st.secrets('client_id')
-CLIENT_SECRET = st.secrets('client_secret')
+CLIENT_ID = os.environ['client_id']
+CLIENT_SECRET = os.environ['client_secret']
 
 hide_default_format = """
        <style>
