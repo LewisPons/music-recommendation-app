@@ -7,3 +7,4 @@ streamlit
 fastparquet
 scikit-image
 matplotlib
+watchdog==2.0.0

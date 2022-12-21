@@ -6,15 +6,11 @@ from utils import call_playlist, music_recomendation, get_songs_visuals, SONG_FE
 import codecs
 import os
 
-# https://open.spotify.com/playlist/7sY3tKQa40BXziDEer3m3I?si=89f0cffef02e41ec
 
 st.set_page_config(page_title="Music Recomendation App")
 
-
-CLIENT_ID = os.environ['client_id']
-CLIENT_SECRET = os.environ['client_secret']
-# CLIENT_ID = st.secrets('client_id')
-# CLIENT_SECRET = st.secrets('client_secret')
+CLIENT_ID = st.secrets('client_id')
+CLIENT_SECRET = st.secrets('client_secret')
 
 hide_default_format = """
        <style>
@@ -57,7 +53,7 @@ if app_mode == 'Run App':
     
     dataset = read_full_dataset()
     
-    if (len(playlist_link) != 0) & (playlist_link[:34] == 'https://open.spotify.com/playlist/'):
+    if (len(playlist_link) != 0) & ('playlist' in playlist_link):
         df = call_playlist(playlist_link, CLIENT_ID, CLIENT_SECRET)
         
         st.dataframe(df)
@@ -83,6 +79,10 @@ if app_mode == 'Run App':
             
         else:
             st.write('Please Select only one song')
+            
+    elif len(playlist_link) == 0:
+        st.write('Please Insert a link :)')
+        
     else:
         st.write('Please check the Playlist link is correct :)')
         
@@ -99,7 +99,7 @@ elif app_mode == "About Me":
     col1.markdown('* [**LinkedIn**](https://www.linkedin.com/in/luis-morales-ponce/)')
     col1.markdown('* [**GitHub**](https://github.com/LewisPons)')
     image2 = Image.open('profile.jpeg')
-    st.image(image2,width=230)
+    st.image(image2)
 
 elif app_mode =="Obtain your Spotify URI":
     stepflow_file = codecs.open("SpotifyWorkflow.html", "r", "utf-8")
