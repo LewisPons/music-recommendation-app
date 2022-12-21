@@ -1,3 +1,5 @@
 cosine_similarity.ipynb
 credentials.py
 .DS_Store
+.cache
+__pychache__/

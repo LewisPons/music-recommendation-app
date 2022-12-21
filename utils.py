@@ -98,12 +98,18 @@ def get_songs_visuals(df: pd.DataFrame, cid: str, client_secret: str) -> pd.Data
     )
     ids = df['id'].to_list()
     urls = []
+    artist_links = []
+    
     for id in ids:
         urn = f'spotify:track:{id}'
         track_url = sp.track(urn)['album']['images'][0]['url']
+        artist_link  = sp.track(urn)['album']['artists'][0]['external_urls']['spotify']
+    
         urls.append(track_url)
+        artist_links.append(artist_link)
     
     df['url'] = urls
+    df['artist_link'] = artist_links
     return df
 
 
