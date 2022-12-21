@@ -4,6 +4,7 @@ from spotipy.oauth2 import SpotifyClientCredentials
 import pandas as pd
 import numpy as np 
 from skimage import io
+import urllib
 import matplotlib.pyplot as plt
 from sklearn.metrics.pairwise import cosine_similarity
 
@@ -124,3 +125,9 @@ def visualize_cover_art(playlist_df):
         plt.subplots_adjust(wspace=None, hspace=None)
     
     plt.savefig('recommended_songs.png', dpi=400)
+    
+def download_image(df: pd.DataFrame):    
+    urls = df['url'].to_list()
+    songs = df['track_name'].to_list()
+    for i in range(urls):
+        urllib.request.urlretrieve(urls[i], f"./tmp/{songs[i]}-filename.jpg")

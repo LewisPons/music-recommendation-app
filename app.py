@@ -3,14 +3,17 @@ import streamlit as st
 import pandas as pd
 from PIL import Image
 from utils import call_playlist, music_recomendation, get_songs_visuals, SONG_FEATURES, visualize_cover_art
+from streamlit_extras.no_default_selectbox import selectbox
 import codecs
 import os
 
+CLIENT_ID = "da82a340bd1341599bd3c590de6ad9fa"
+CLIENT_SECRET = "2c8640b95bc14b3b8edeab8585bf13af"
 
 st.set_page_config(page_title="Music Recomendation App")
 
-CLIENT_ID = os.environ['client_id']
-CLIENT_SECRET = os.environ['client_secret']
+# CLIENT_ID = os.environ['client_id']
+# CLIENT_SECRET = os.environ['client_secret']
 
 hide_default_format = """
        <style>
@@ -57,28 +60,51 @@ if app_mode == 'Run App':
         df = call_playlist(playlist_link, CLIENT_ID, CLIENT_SECRET)
         
         st.dataframe(df)
-        # data = st.cache(pd.read_csv)
-        selected_indices = st.multiselect('Select a song to generate recomendations:', df.index)
+        songs_list = df['track_name'].to_list()
+        selected_song = selectbox('Select a song to generate recomendations:', songs_list)
         
-        if len(selected_indices) == 1:
-            selected_song_df = df.loc[selected_indices]
+        if selected_song is not None:
+            selected_song_df = df[df['track_name'] == selected_song]
             st.write('Selected Song:', selected_song_df)
+            
+            selected_song_track_id = selected_song_df['track_id'].values[0]
+            selected_song_track_name = selected_song_df['track_name'].values[0]
+            
+
+            dataset = dataset[ ~(dataset['id'] == selected_song_track_id) & ~(dataset['name'] == selected_song_track_name)]            
             recomendations_df = music_recomendation(dataset, selected_song_df)
             recomendations_df = get_songs_visuals(recomendations_df, CLIENT_ID, CLIENT_SECRET)
-            
             
             st.subheader('Recomendations generated:')
             st.write('Check out the top 3 songs for you!', recomendations_df) 
             
-            st.markdown(f"![Alt Text]({recomendations_df['url'][0]})")
-            st.markdown(f"![Alt Text]({recomendations_df['url'][1]})")
-            st.markdown(f"![Alt Text]({recomendations_df['url'][2]})")
-            
+            with st.container():
+                col1, col2 = st.columns([3,1])
 
-            
-            
-        else:
-            st.write('Please Select only one song')
+                with col1:
+                    st.image(recomendations_df['url'][0])
+                with col2:
+                    st.markdown(f"""**Song:** {recomendations_df['name'][0]}""")
+                    st.markdown(f"""**Artists**: {recomendations_df['artists'][0].replace('[','').replace(']','').replace("'",'')}""")
+                    
+            with st.container():
+                col1, col2 = st.columns([3,1])
+
+                with col1:
+                    st.image(recomendations_df['url'][1])
+                with col2:
+                    st.markdown(f"""**Song:** {recomendations_df['name'][1]}""")
+                    st.markdown(f"""**Artists**: {recomendations_df['artists'][1].replace('[','').replace(']','').replace("'",'')}""")
+                    
+            with st.container():
+                col1, col2 = st.columns([3,1])
+
+                with col1:
+                    st.image(recomendations_df['url'][2])
+                with col2:
+                    st.markdown(f"""**Song:** {recomendations_df['name'][2]}""")
+                    st.markdown(f"""**Artists**: {recomendations_df['artists'][2].replace('[','').replace(']','').replace("'",'')}""")
+
             
     elif len(playlist_link) == 0:
         st.write('Please Insert a link :)')

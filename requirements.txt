@@ -8,3 +8,5 @@ fastparquet
 scikit-image
 matplotlib
 watchdog==2.0.0
+streamlit-extras
+urllib3
