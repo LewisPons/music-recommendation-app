@@ -1,12 +1,25 @@
-# music-recommendation-app
+# Music Recommendation App
 Spotify Music recomendation system based on user's preference.
 
 This is a first version Content-Based Music Recommendation System. You can take a look to the running app in [Streamlit Cloud here](https://github.com/LewisPons/MLOps)
 
 The model was trained based on this [dataset](https://www.kaggle.com/datasets/yamaerenay/spotify-dataset-19212020-600k-tracks).
 
+You can take a look to the model experimentation phase in this [repo](https://github.com/LewisPons/MLOps).
 
+## Tech Stach
+- Python 
+  -   pandas
+  -   scikit-learn
+  -   faiss
+  -   matplotlib
+  -   seaborn
+  -   nltk
+- Spotify API
+- Streamlit
+- Streamlit IO for Cloud deployment 🚀
 
+## How to use the App
 
 To start generating recomendations:
 1. Open Spotify.
