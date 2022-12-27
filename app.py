@@ -40,6 +40,7 @@ if app_mode == "Generate Recomendations":
     The model was trained based on this [dataset](https://www.kaggle.com/datasets/yamaerenay/spotify-dataset-19212020-600k-tracks).\n
     \n
     To learn more about the model's training dataset, the EDA phase and the distribution of the features, click on the tab **About the Dataset**.
+    
     To start generating recomendations:
     1. Open Spotify.
     2. Select your favourite Playlist.
