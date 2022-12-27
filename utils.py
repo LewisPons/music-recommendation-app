@@ -137,3 +137,27 @@ def download_image(df: pd.DataFrame):
     songs = df['track_name'].to_list()
     for i in range(urls):
         urllib.request.urlretrieve(urls[i], f"./tmp/{songs[i]}-filename.jpg")
+
+
+def summary_statistic_plot(df: pd.DataFrame, column: str, **kwargs):
+    """
+    Function to plot  a histogram, a boxplot and the descriptive statistics into one single plot
+    
+    Parameters:
+    ----------
+        df : pd.DataFrame
+        column: str
+            column that has a numeric data type
+
+    """
+    sns.set(style="darkgrid")
+    
+    splits = str(df[column].describe()).split()
+    
+    f, (ax_box, ax_hist) = plt.subplots(2, sharex=True, gridspec_kw={"height_ratios": (.15, .85)})
+    sns.histplot(x = column, data = df, ax=ax_hist, **kwargs)
+    sns.boxplot(x = column, data=df, ax=ax_box)
+    
+    plt.figtext(.95, .20, describe_helper(df[column])[0], {'multialignment':'left'})
+    plt.figtext(1.05, .20, describe_helper(df[column])[1], {'multialignment':'right'})
+    plt.show()
