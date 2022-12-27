@@ -10,10 +10,9 @@ import os
 
 st.set_page_config(page_title="Music Recomendation App")
 
-# CLIENT_ID = os.environ['client_id']
-# CLIENT_SECRET = os.environ['client_secret']
-CLIENT_ID="da82a340bd1341599bd3c590de6ad9fa"
-CLIENT_SECRET="2c8640b95bc14b3b8edeab8585bf13af"
+CLIENT_ID = os.environ['client_id']
+CLIENT_SECRET = os.environ['client_secret']
+
 hide_default_format = """
        <style>
        #MainMenu {visibility: hidden; }
